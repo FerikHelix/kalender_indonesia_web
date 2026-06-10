@@ -2,6 +2,7 @@ import { CalendarHeader } from './CalendarHeader';
 import { DayCell } from './DayCell';
 import { useEffect, useRef, useMemo } from 'preact/hooks';
 import { useMonthDays } from '../../hooks/useCalendar';
+import { memo } from 'preact/compat';
 
 interface CalendarViewProps {
   selectedDate: Date;
@@ -10,7 +11,7 @@ interface CalendarViewProps {
   onMonthChange: (date: Date) => void;
 }
 
-function CalendarGrid({ monthDate, selectedDate, onSelectDate }: { monthDate: Date, selectedDate: Date, onSelectDate: (d: Date) => void }) {
+const CalendarGrid = memo(function CalendarGrid({ monthDate, selectedDate, onSelectDate }: { monthDate: Date, selectedDate: Date | null, onSelectDate: (d: Date) => void }) {
   const days = useMonthDays(monthDate);
   
   return (
@@ -19,13 +20,13 @@ function CalendarGrid({ monthDate, selectedDate, onSelectDate }: { monthDate: Da
         <DayCell 
           key={`${monthDate.toISOString()}-${idx}`} 
           day={day} 
-          isSelected={selectedDate.toDateString() === day.date.toDateString()}
+          isSelected={selectedDate ? selectedDate.toDateString() === day.date.toDateString() : false}
           onClick={() => onSelectDate(day.date)}
         />
       ))}
     </div>
   );
-}
+});
 
 export function CalendarView({ selectedDate, onSelectDate, currentMonth, onMonthChange }: CalendarViewProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -133,11 +134,18 @@ export function CalendarView({ selectedDate, onSelectDate, currentMonth, onMonth
           onScroll={onScroll}
           style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
         >
-          {allMonths.map((month, idx) => (
-            <div key={`month-${idx}`} className="w-full shrink-0 snap-center">
-              <CalendarGrid monthDate={month} selectedDate={selectedDate} onSelectDate={onSelectDate} />
-            </div>
-          ))}
+          {allMonths.map((month, idx) => {
+            const hasSelectedDate = month.getFullYear() === selectedDate.getFullYear() && month.getMonth() === selectedDate.getMonth();
+            return (
+              <div key={`month-${idx}`} className="w-full shrink-0 snap-center">
+                <CalendarGrid 
+                  monthDate={month} 
+                  selectedDate={hasSelectedDate ? selectedDate : null} 
+                  onSelectDate={onSelectDate} 
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
