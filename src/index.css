@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Elegant Indigo/Violet Theme */
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+
+  /* National Holidays: Rose/Red */
+  --color-national-50: #fff1f2;
+  --color-national-100: #ffe4e6;
+  --color-national-200: #fecdd3;
+  --color-national-300: #fda4af;
+  --color-national-400: #fb7185;
+  --color-national-500: #f43f5e;
+  --color-national-600: #e11d48;
+  --color-national-700: #be123c;
+
+  /* Collective Leave: Teal/Emerald */
+  --color-collective-50: #f0fdfa;
+  --color-collective-100: #ccfbf1;
+  --color-collective-200: #99f6e4;
+  --color-collective-300: #5eead4;
+  --color-collective-400: #2dd4bf;
+  --color-collective-500: #14b8a6;
+  --color-collective-600: #0d9488;
+  --color-collective-700: #0f766e;
+
+  /* Sleek Surfaces (Slate-inspired, brighter dark mode) */
+  --color-surface-50: #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-300: #cbd5e1;
+  --color-surface-400: #94a3b8;
+  --color-surface-500: #64748b;
+  --color-surface-600: #475569;
+  --color-surface-700: #334155;
+  --color-surface-800: #1e293b;
+  --color-surface-900: #0f172a;
+  --color-surface-950: #020617;
+}
+
+@layer base {
+  body {
+    @apply bg-surface-100 text-surface-900 dark:bg-surface-900 dark:text-surface-50 transition-colors duration-300 antialiased selection:bg-primary-500/30;
+  }
+}
+
+/* Custom scrollbar for modern look */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-surface-300 dark:bg-surface-700 rounded-full;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

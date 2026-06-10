@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/kalender_indonesia_web/dev-sw.js?dev-sw', { scope: '/kalender_indonesia_web/', type: 'classic' })
