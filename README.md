@@ -1,5 +1,7 @@
 # Kalender Indonesia Web 🇮🇩📅
 
+https://ferikhelix.github.io/kalender_indonesia_web/
+
 A beautifully designed, modern, and production-ready Indonesian Holiday Calendar web application. Built entirely as a static client-side application, it provides blazing-fast performance with zero backend dependencies, making it perfect for GitHub Pages or offline use.
 
 ![Kalender Preview](./preview.png) *(You can add a screenshot here later!)*
